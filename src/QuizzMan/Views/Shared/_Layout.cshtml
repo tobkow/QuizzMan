@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Site Properties -->
+    <title>@ViewBag.Title</title>
+
+    <environment names="Development">
+        <link rel="stylesheet" type="text/css" href="~/lib/semantic-ui/dist/components/reset.css">
+        <link rel="stylesheet" type="text/css" href="~/lib/semantic-ui/dist/components/site.css">
+
+        <link rel="stylesheet" type="text/css" href="~/lib/semantic-ui/dist/components/container.css">
+        <link rel="stylesheet" type="text/css" href="~/lib/semantic-ui/dist/components/grid.css">
+        <link rel="stylesheet" type="text/css" href="~/lib/semantic-ui/dist/components/header.css">
+        <link rel="stylesheet" type="text/css" href="~/lib/semantic-ui/dist/components/image.css">
+        <link rel="stylesheet" type="text/css" href="~/lib/semantic-ui/dist/components/menu.css">
+
+        <link rel="stylesheet" type="text/css" href="~/lib/semantic-ui/dist/components/divider.css">
+        <link rel="stylesheet" type="text/css" href="~/lib/semantic-ui/dist/components/dropdown.css">
+        <link rel="stylesheet" type="text/css" href="~/lib/semantic-ui/dist/components/segment.css">
+        <link rel="stylesheet" type="text/css" href="~/lib/semantic-ui/dist/components/button.css">
+        <link rel="stylesheet" type="text/css" href="~/lib/semantic-ui/dist/components/list.css">
+        <link rel="stylesheet" type="text/css" href="~/lib/semantic-ui/dist/components/icon.css">
+        <link rel="stylesheet" type="text/css" href="~/lib/semantic-ui/dist/components/sidebar.css">
+        <link rel="stylesheet" type="text/css" href="~/lib/semantic-ui/dist/components/transition.css">
+
+        <link rel="stylesheet" type="text/css" href="~/css/site.css">
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://cdnjs.com/libraries/semantic-ui/2.1.8/components/reset.min.css"
+              asp-fallback-href="~/lib/semantic-ui/dist/components/reset.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="https://cdnjs.com/libraries/semantic-ui/2.1.8/components/site.min.css"
+              asp-fallback-href="~/lib/semantic-ui/dist/components/site.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+
+        <link rel="stylesheet" href="https://cdnjs.com/libraries/semantic-ui/2.1.8/components/container.min.css"
+              asp-fallback-href="~/lib/semantic-ui/dist/components/container.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="https://cdnjs.com/libraries/semantic-ui/2.1.8/components/grid.min.css"
+              asp-fallback-href="~/lib/semantic-ui/dist/components/grid.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="https://cdnjs.com/libraries/semantic-ui/2.1.8/components/header.min.css"
+              asp-fallback-href="~/lib/semantic-ui/dist/components/header.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="https://cdnjs.com/libraries/semantic-ui/2.1.8/components/image.min.css"
+              asp-fallback-href="~/lib/semantic-ui/dist/components/image.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="https://cdnjs.com/libraries/semantic-ui/2.1.8/components/menu.min.css"
+              asp-fallback-href="~/lib/semantic-ui/dist/components/menu.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+
+        <link rel="stylesheet" href="https://cdnjs.com/libraries/semantic-ui/2.1.8/components/divider.min.css"
+              asp-fallback-href="~/lib/semantic-ui/dist/components/divider.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="https://cdnjs.com/libraries/semantic-ui/2.1.8/components/dropdown.min.css"
+              asp-fallback-href="~/lib/semantic-ui/dist/components/dropdown.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="https://cdnjs.com/libraries/semantic-ui/2.1.8/components/segment.min.css"
+              asp-fallback-href="~/lib/semantic-ui/dist/components/segment.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="https://cdnjs.com/libraries/semantic-ui/2.1.8/components/button.min.css"
+              asp-fallback-href="~/lib/semantic-ui/dist/components/button.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="https://cdnjs.com/libraries/semantic-ui/2.1.8/components/list.min.css"
+              asp-fallback-href="~/lib/semantic-ui/dist/components/list.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="https://cdnjs.com/libraries/semantic-ui/2.1.8/components/icon.min.css"
+              asp-fallback-href="~/lib/semantic-ui/dist/components/icon.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="https://cdnjs.com/libraries/semantic-ui/2.1.8/components/sidebar.min.css"
+              asp-fallback-href="~/lib/semantic-ui/dist/components/sidebar.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="https://cdnjs.com/libraries/semantic-ui/2.1.8/components/transition.min.css"
+              asp-fallback-href="~/lib/semantic-ui/dist/components/transition.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+
+        <link rel="stylesheet" type="text/css" href="~/css/site.min.css">
+    </environment>
+</head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+
+    <environment names="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/semantic-ui/dist/components/visibility.js"></script>
+        <script src="~/lib/semantic-ui/dist/components/sidebar.js"></script>
+        <script src="~/lib/semantic-ui/dist/components/transition.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.2.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery">
+        </script>
+        <script src="https://cdnjs.com/libraries/semantic-ui/2.1.8/components/visibility.min.js"
+                asp-fallback-src="~/lib/semantic-ui/dist/components/visibility.min.js">
+        </script>
+        <script src="https://cdnjs.com/libraries/semantic-ui/2.1.8/components/sidebar.min.js"
+                asp-fallback-src="~/lib/semantic-ui/dist/components/sidebar.min.js">
+        </script>
+        <script src="https://cdnjs.com/libraries/semantic-ui/2.1.8/components/transition.min.js"
+                asp-fallback-src="~/lib/semantic-ui/dist/components/transition.min.js">
+        </script>
+
+                <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
