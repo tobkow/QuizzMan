@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Website", "src\QuizzMan\Website.xproj", "{9130B326-2320-4BD7-B55A-5E6B6333A9E2}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "IdentityStore", "src\IdentityStore\IdentityStore.xproj", "{A682C797-8CFF-4B92-A17F-BDCFACADF199}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,11 +24,16 @@ Global
 		{9130B326-2320-4BD7-B55A-5E6B6333A9E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9130B326-2320-4BD7-B55A-5E6B6333A9E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9130B326-2320-4BD7-B55A-5E6B6333A9E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A682C797-8CFF-4B92-A17F-BDCFACADF199}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A682C797-8CFF-4B92-A17F-BDCFACADF199}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A682C797-8CFF-4B92-A17F-BDCFACADF199}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A682C797-8CFF-4B92-A17F-BDCFACADF199}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9130B326-2320-4BD7-B55A-5E6B6333A9E2} = {5A0D8631-AFCE-448A-8D43-0F9DAD33A46C}
+		{A682C797-8CFF-4B92-A17F-BDCFACADF199} = {5A0D8631-AFCE-448A-8D43-0F9DAD33A46C}
 	EndGlobalSection
 EndGlobal
