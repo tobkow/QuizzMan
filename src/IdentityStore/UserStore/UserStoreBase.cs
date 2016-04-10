@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Threading;
 using Microsoft.AspNet.Identity;
@@ -10,8 +8,7 @@ namespace QuizzMan.IdentityStore
     public class UserStoreBase<TUser> : IUserStore<TUser> where TUser : class,IUser
     {
         private bool _disposed;
-        protected IUserRepository<TUser> _userRepo;
-
+        
         protected void ThrowIfDisposed()
         {
             if (_disposed)
@@ -20,16 +17,12 @@ namespace QuizzMan.IdentityStore
             }
         }
 
+        protected IUserRepository<TUser> _userRepo;
         protected UserStoreBase() { }
 
         public UserStoreBase(IUserRepository<TUser> userRepo)
         {
             _userRepo = userRepo;
-        }
-
-        public void Dispose()
-        {
-            _disposed = true;
         }
 
         public Task<string> GetUserIdAsync(TUser user, CancellationToken cancellationToken)
@@ -147,6 +140,11 @@ namespace QuizzMan.IdentityStore
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             return await _userRepo.GetUserByNameAsync(normalizedUserName);
+        }
+
+        public void Dispose()
+        {
+            _disposed = true;
         }
     }
 }
