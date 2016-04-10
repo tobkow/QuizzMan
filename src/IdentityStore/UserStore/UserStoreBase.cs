@@ -10,7 +10,7 @@ namespace QuizzMan.IdentityStore
     public class UserStoreBase<TUser> : IUserStore<TUser> where TUser : class,IUser
     {
         private bool _disposed;
-        private IUserRepository<TUser> _userRepo;
+        protected IUserRepository<TUser> _userRepo;
 
         protected void ThrowIfDisposed()
         {
@@ -139,14 +139,14 @@ namespace QuizzMan.IdentityStore
             ThrowIfDisposed();
 
             // PARSE WITHOUT EXCEPTIONS HERE
-            return await _userRepo.FindByIdAsync(int.Parse(userId));
+            return await _userRepo.GetUserByIdAsync(int.Parse(userId));
         }
 
         public async Task<TUser> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
-            return await _userRepo.FindByNameAsync(normalizedUserName);
+            return await _userRepo.GetUserByNameAsync(normalizedUserName);
         }
     }
 }

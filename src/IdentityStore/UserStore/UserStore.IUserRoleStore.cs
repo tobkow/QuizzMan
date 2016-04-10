@@ -12,29 +12,101 @@ namespace QuizzMan.IdentityStore
 {
     public partial class UserStore<TUser> : IUserRoleStore<TUser> where TUser : class, IUser
     {
-        public Task AddToRoleAsync(TUser user, string roleName, CancellationToken cancellationToken)
+        public async Task AddToRoleAsync(TUser user, string roleName, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            cancellationToken.ThrowIfCancellationRequested();
+            ThrowIfDisposed();
+
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+            if (string.IsNullOrWhiteSpace(roleName))
+            {
+                throw new ArgumentException(nameof(roleName));
+            }
+
+            var role = await _userRepo.GetRoleByName(roleName);
+            bool result = false;
+            if (role != null)
+            {
+                result = await _userRepo.AddUserToRole(role.RoleId, role.RoleGuid, user.Id);
+            }
         }
 
-        public Task<IList<string>> GetRolesAsync(TUser user, CancellationToken cancellationToken)
+        public async Task<IList<string>> GetRolesAsync(TUser user, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            cancellationToken.ThrowIfCancellationRequested();
+            ThrowIfDisposed();
+
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+
+            return await _userRepo.GetRolesForUser(user.Id);
         }
 
-        public Task<IList<TUser>> GetUsersInRoleAsync(string roleName, CancellationToken cancellationToken)
+        public async Task<IList<TUser>> GetUsersInRoleAsync(string roleName, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            cancellationToken.ThrowIfCancellationRequested();
+            ThrowIfDisposed();
+
+            if (String.IsNullOrEmpty(roleName))
+            {
+                throw new ArgumentNullException(nameof(roleName));
+            }
+
+            return await _userRepo.GetUsersInRole(roleName);
         }
 
-        public Task<bool> IsInRoleAsync(TUser user, string roleName, CancellationToken cancellationToken)
+        public async Task<bool> IsInRoleAsync(TUser user, string roleName, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            cancellationToken.ThrowIfCancellationRequested();
+            ThrowIfDisposed();
+
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+            if (string.IsNullOrWhiteSpace(roleName))
+            {
+                throw new ArgumentException(nameof(roleName));
+            }
+
+            IList<string> roles = await _userRepo.GetRolesForUser(user.Id);
+
+            foreach (string r in roles)
+            {
+                if (string.Equals(r, roleName, StringComparison.CurrentCultureIgnoreCase))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
-        public Task RemoveFromRoleAsync(TUser user, string roleName, CancellationToken cancellationToken)
+        public async Task RemoveFromRoleAsync(TUser user, string roleName, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            cancellationToken.ThrowIfCancellationRequested();
+            ThrowIfDisposed();
+
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+            if (string.IsNullOrWhiteSpace(roleName))
+            {
+                throw new ArgumentException(nameof(roleName));
+            }
+
+            var role = await _userRepo.GetRoleByName(roleName);
+            
+            if (role != null)
+            {
+                await _userRepo.RemoveUserFromRole(role.RoleId, user.Id);
+            }
         }
     }
 }

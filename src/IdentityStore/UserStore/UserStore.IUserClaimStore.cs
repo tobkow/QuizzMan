@@ -10,39 +10,108 @@ namespace QuizzMan.IdentityStore.UserStore
 {
     public partial class UserStore<TUser> : UserStoreBase<TUser>, IUserClaimStore<TUser> where TUser : class,IUser
     {
-        public Task AddClaimsAsync(TUser user, IEnumerable<Claim> claims, CancellationToken cancellationToken)
+        public async Task AddClaimsAsync(TUser user, IEnumerable<Claim> claims, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            ThrowIfDisposed();
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+            if (claims == null)
+            {
+                throw new ArgumentNullException(nameof(claims));
+            }
+
+            foreach (var claim in claims)
+            {
+                var userClaim = new UserClaim();
+                userClaim.UserId = user.Id;
+                userClaim.ClaimType = claim.Type;
+                userClaim.ClaimValue = claim.Value;
+                cancellationToken.ThrowIfCancellationRequested();
+                bool result = await _userRepo.Save(userClaim);
+            }
         }
 
-        public Task<IList<Claim>> GetClaimsAsync(TUser user, CancellationToken cancellationToken)
+        public async Task<IList<Claim>> GetClaimsAsync(TUser user, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            ThrowIfDisposed();
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+
+            cancellationToken.ThrowIfCancellationRequested();
+
+            IList<Claim> claims = new List<Claim>();
+            IList<IUserClaim> userClaims = await _userRepo.GetClaimsForUser(user.Id);
+
+            foreach (UserClaim uc in userClaims)
+            {
+                Claim c = new Claim(uc.ClaimType, uc.ClaimValue);
+                claims.Add(c);
+            }
+
+            return claims;
         }
 
-        public Task<IList<TUser>> GetUsersForClaimAsync(Claim claim, CancellationToken cancellationToken)
+        public async Task<IList<TUser>> GetUsersForClaimAsync(Claim claim, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            cancellationToken.ThrowIfCancellationRequested();
+            ThrowIfDisposed();
+            if (claim == null)
+            {
+                throw new ArgumentNullException(nameof(claim));
+            }
+
+            return await _userRepo.GetUsersByClaim(claim.Type, claim.Value);
         }
 
-        public Task RemoveClaimsAsync(TUser user, IEnumerable<Claim> claims, CancellationToken cancellationToken)
+        public async Task RemoveClaimsAsync(TUser user, IEnumerable<Claim> claims, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            ThrowIfDisposed();
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+            if (claims == null)
+            {
+                throw new ArgumentNullException(nameof(claims));
+            }
+
+            foreach (var claim in claims)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                await _userRepo.DeleteClaimForUser(user.Id, claim.Type, claim.Value);
+            }
         }
 
-        public Task ReplaceClaimAsync(TUser user, Claim claim, Claim newClaim, CancellationToken cancellationToken)
+        public async Task ReplaceClaimAsync(TUser user, Claim claim, Claim newClaim, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
-        }
+            ThrowIfDisposed();
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+            if (claim == null)
+            {
+                throw new ArgumentNullException(nameof(claim));
+            }
+            if (newClaim == null)
+            {
+                throw new ArgumentNullException(nameof(newClaim));
+            }
 
-        public Task SetNormalizedUserNameAsync(TUser user, string normalizedName, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
+            await _userRepo.DeleteClaimForUser(user.Id, claim.Type, claim.Value);
 
-        public Task SetUserNameAsync(TUser user, string userName, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
+            UserClaim userClaim = new UserClaim();
+            userClaim.UserId = user.Id;
+            userClaim.ClaimType = newClaim.Type;
+            userClaim.ClaimValue = newClaim.Value;
+
+            cancellationToken.ThrowIfCancellationRequested();
+
+            bool result = await _userRepo.Save(userClaim);
         }
     }
 }

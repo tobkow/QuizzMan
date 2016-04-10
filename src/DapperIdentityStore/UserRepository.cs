@@ -7,9 +7,24 @@ using System.Threading.Tasks;
 
 namespace QuizzMan.IdentityStore.Dapper
 {
-    public class UserRepository : RepositoryBase, IUserRepository<User>
+    public partial class UserRepository : RepositoryBase, IUserRepository<User>
     {
         public UserRepository(string connectionString): base (connectionString) { }
+
+        public async Task<User> GetUserByNameAsync(string normalizedName)
+        {
+            return await WithConnection(async c => {
+
+                var p = new DynamicParameters();
+                //p.Add("Id", Id, DbType.Guid);
+                var people = await c.QueryAsync<User>(
+                    sql: "sp_Person_GetById",
+                    param: p,
+                    commandType: CommandType.StoredProcedure);
+                return people.FirstOrDefault(u => u.NormalizedUserName == normalizedName);
+
+            });
+        }
 
         public Task<bool> Create(User user)
         {
@@ -26,7 +41,7 @@ namespace QuizzMan.IdentityStore.Dapper
             throw new NotImplementedException();
         }
 
-        public async Task<User> FindByIdAsync(int id)
+        public async Task<User> GetUserByIdAsync(int id)
         {
             return await WithConnection(async c => {
 
@@ -41,19 +56,19 @@ namespace QuizzMan.IdentityStore.Dapper
             });
         }
 
-        public async Task<User> FindByNameAsync(string normalizedName)
+        public Task<User> GetByEmail(string normalizedEmail)
         {
-            return await WithConnection(async c => {
+            throw new NotImplementedException();
+        }
 
-                var p = new DynamicParameters();
-                //p.Add("Id", Id, DbType.Guid);
-                var people = await c.QueryAsync<User>(
-                    sql: "sp_Person_GetById",
-                    param: p,
-                    commandType: CommandType.StoredProcedure);
-                return people.FirstOrDefault(u => u.NormalizedUserName == normalizedName);
+        public Task<bool> UpdateAccessFailedCount(int userId, int accessFailedCount)
+        {
+            throw new NotImplementedException();
+        }
 
-            });
+        public Task<bool> Save(IUser user)
+        {
+            throw new NotImplementedException();
         }
     }
 }
