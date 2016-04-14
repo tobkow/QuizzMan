@@ -16,7 +16,7 @@ namespace QuizzMan.IdentityStore
         /// <typeparam name="TContext">The Entity Framework database context to use.</typeparam>
         /// <param name="builder">The <see cref="IdentityBuilder"/> instance this method extends.</param>
         /// <returns>The <see cref="IdentityBuilder"/> instance this method extends.</returns>
-        public static IdentityBuilder AddEntityFrameworkStores(this IdentityBuilder builder)
+        public static IdentityBuilder AddDapperIdentityStores(this IdentityBuilder builder)
         {
             builder.Services.TryAdd(GetDefaultServices(builder.UserType, builder.RoleType));
             return builder;
@@ -30,11 +30,8 @@ namespace QuizzMan.IdentityStore
 
         private static IServiceCollection GetDefaultServices(Type userType, Type roleType)
         {
-            Type userStoreType;
-            Type roleStoreType;
-
-            userStoreType = typeof(UserStore<>).MakeGenericType(userType);
-            roleStoreType = typeof(RoleStore<>).MakeGenericType(roleType);
+            var userStoreType = typeof(UserStore<>).MakeGenericType(userType);
+            var roleStoreType = typeof(RoleStore<>).MakeGenericType(roleType);
 
 
             var services = new ServiceCollection();
