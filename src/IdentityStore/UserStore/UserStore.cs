@@ -11,14 +11,18 @@ using Microsoft.AspNet.Identity;
 
 namespace QuizzMan.IdentityStore
 {
-    public partial class UserStore<TUser> : UserStoreBase<TUser> where TUser : class,IUser
+    public partial class UserStore<TUser,TRole,TIdentityRepo> : UserStoreBase<TUser,TRole,TIdentityRepo>,
+        IUserStore<TUser>
+        where TIdentityRepo : IIdentityRepository<TUser,TRole>
+        where TUser : class,IUser
+        where TRole : class, IRole
     {
         private UserStore() : base(){ }
         private ILogger log;
         private bool debugLog = false;
         
 
-        public UserStore(ILogger<UserStore<TUser>> logger,IUserRepository<TUser> userRepository)
+        public UserStore(ILogger<UserStore<TUser,TRole,TIdentityRepo>> logger,IIdentityRepository<TUser,TRole> userRepository)
         {
             log = logger;
 

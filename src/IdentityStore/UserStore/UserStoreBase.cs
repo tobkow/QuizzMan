@@ -5,7 +5,10 @@ using Microsoft.AspNet.Identity;
 
 namespace QuizzMan.IdentityStore
 {
-    public class UserStoreBase<TUser> : IUserStore<TUser> where TUser : class,IUser
+    public class UserStoreBase<TUser,TRole,TIdentityRepo>
+        where TIdentityRepo : IIdentityRepository<TUser, TRole>
+        where TUser : class, IUser
+        where TRole : class, IRole
     {
         private bool _disposed;
         
@@ -17,10 +20,10 @@ namespace QuizzMan.IdentityStore
             }
         }
 
-        protected IUserRepository<TUser> _userRepo;
+        protected TIdentityRepo _userRepo;
         protected UserStoreBase() { }
 
-        public UserStoreBase(IUserRepository<TUser> userRepo)
+        public UserStoreBase(TIdentityRepo userRepo)
         {
             _userRepo = userRepo;
         }

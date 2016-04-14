@@ -10,7 +10,11 @@ using Microsoft.AspNet.Identity;
 
 namespace QuizzMan.IdentityStore
 {
-    public partial class UserStore<TUser> : IUserRoleStore<TUser> where TUser : class, IUser
+    public partial class UserStore<TUser,TRole,TIdentityRepo> : UserStoreBase<TUser,TRole,TIdentityRepo>,
+        IUserRoleStore<TUser>
+        where TIdentityRepo : IIdentityRepository<TUser,TRole>
+        where TUser : class, IUser
+        where TRole : class, IRole
     {
         public async Task AddToRoleAsync(TUser user, string roleName, CancellationToken cancellationToken)
         {
@@ -30,7 +34,7 @@ namespace QuizzMan.IdentityStore
             bool result = false;
             if (role != null)
             {
-                result = await _userRepo.AddUserToRole(role.RoleId, role.RoleGuid, user.Id);
+                result = await _userRepo.AddUserToRole(user.Id, role.Id);
             }
         }
 
@@ -105,7 +109,7 @@ namespace QuizzMan.IdentityStore
             
             if (role != null)
             {
-                await _userRepo.RemoveUserFromRole(role.RoleId, user.Id);
+                await _userRepo.RemoveUserFromRole(role.Id, user.Id);
             }
         }
     }

@@ -7,7 +7,11 @@ using Microsoft.AspNet.Identity;
 
 namespace QuizzMan.IdentityStore.UserStore
 {
-    public partial class UserStore<TUser> : UserStoreBase<TUser>, IUserEmailStore<TUser> where TUser : class,IUser
+    public partial class UserStore<TUser,TRole,TIdentityRepo> : UserStoreBase<TUser,TRole,TIdentityRepo>,
+        IUserEmailStore<TUser>
+        where TIdentityRepo : IIdentityRepository<TUser,TRole>
+        where TUser : class, IUser
+        where TRole : class, IRole
     {
         public async Task<TUser> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken)
         {
@@ -50,7 +54,7 @@ namespace QuizzMan.IdentityStore.UserStore
             return Task.FromResult(user.NormalizedEmail);
         }
 
-        public async Task SetEmailAsync(TUser user, string email, CancellationToken cancellationToken)
+        public Task SetEmailAsync(TUser user, string email, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
@@ -60,12 +64,11 @@ namespace QuizzMan.IdentityStore.UserStore
             }
 
             user.Email = email;
-            user.NormalizedEmail = email.ToLower();
 
-            await _userRepo.Save(user);
+            return Task.FromResult(0);
         }
 
-        public async Task SetEmailConfirmedAsync(TUser user, bool confirmed, CancellationToken cancellationToken)
+        public Task SetEmailConfirmedAsync(TUser user, bool confirmed, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
@@ -75,7 +78,7 @@ namespace QuizzMan.IdentityStore.UserStore
             }
             user.EmailConfirmed = confirmed;
 
-            await _userRepo.Save(user);
+            return Task.FromResult(0);
         }
 
         public Task SetNormalizedEmailAsync(TUser user, string normalizedEmail, CancellationToken cancellationToken)

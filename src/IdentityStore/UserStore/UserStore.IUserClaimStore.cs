@@ -8,7 +8,11 @@ using Microsoft.AspNet.Identity;
 
 namespace QuizzMan.IdentityStore.UserStore
 {
-    public partial class UserStore<TUser> : UserStoreBase<TUser>, IUserClaimStore<TUser> where TUser : class,IUser
+    public partial class UserStore<TUser,TRole,TIdentityRepo> : UserStoreBase<TUser,TRole,TIdentityRepo>,
+        IUserClaimStore<TUser>
+        where TIdentityRepo : IIdentityRepository<TUser,TRole>
+        where TUser : class, IUser
+        where TRole : class, IRole
     {
         public async Task AddClaimsAsync(TUser user, IEnumerable<Claim> claims, CancellationToken cancellationToken)
         {

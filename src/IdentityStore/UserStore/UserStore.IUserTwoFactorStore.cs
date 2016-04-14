@@ -7,7 +7,11 @@ using Microsoft.AspNet.Identity;
 
 namespace QuizzMan.IdentityStore.UserStore
 {
-    public partial class UserStore<TUser> : UserStoreBase<TUser>, IUserTwoFactorStore<TUser> where TUser : class,IUser
+    public partial class UserStore<TUser,TRole,TIdentityRepo> : UserStoreBase<TUser,TRole,TIdentityRepo>,
+        IUserTwoFactorStore<TUser>
+        where TIdentityRepo : IIdentityRepository<TUser,TRole>
+        where TUser : class, IUser
+        where TRole : class, IRole
     {
         public Task<bool> GetTwoFactorEnabledAsync(TUser user, CancellationToken cancellationToken)
         {

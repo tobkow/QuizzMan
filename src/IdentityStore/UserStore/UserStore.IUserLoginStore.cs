@@ -10,7 +10,11 @@ using Microsoft.AspNet.Identity;
 
 namespace QuizzMan.IdentityStore
 {
-    public partial class UserStore<TUser> : IUserLoginStore<TUser> where TUser : class,IUser
+    public partial class UserStore<TUser,TRole,TIdentityRepo> : UserStoreBase<TUser,TRole,TIdentityRepo>,
+        IUserLoginStore<TUser>
+        where TIdentityRepo : IIdentityRepository<TUser,TRole>
+        where TUser : class, IUser
+        where TRole : class, IRole
     {
         public async Task AddLoginAsync(TUser user, UserLoginInfo login, CancellationToken cancellationToken)
         {

@@ -7,7 +7,11 @@ using Microsoft.AspNet.Identity;
 
 namespace QuizzMan.IdentityStore.UserStore
 {
-    public partial class UserStore<TUser> : UserStoreBase<TUser>, IUserLockoutStore<TUser> where TUser : class,IUser
+    public partial class UserStore<TUser,TRole,TIdentityRepo> : UserStoreBase<TUser,TRole,TIdentityRepo>,
+        IUserLockoutStore<TUser>
+        where TIdentityRepo : IIdentityRepository<TUser,TRole>
+        where TUser : class, IUser
+        where TRole : class, IRole
     {
         public Task<int> GetAccessFailedCountAsync(TUser user, CancellationToken cancellationToken)
         {
@@ -43,7 +47,7 @@ namespace QuizzMan.IdentityStore.UserStore
             return Task.FromResult(user.LockoutEnd);
         }
 
-        public async Task<int> IncrementAccessFailedCountAsync(TUser user, CancellationToken cancellationToken)
+        public Task<int> IncrementAccessFailedCountAsync(TUser user, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
@@ -53,12 +57,10 @@ namespace QuizzMan.IdentityStore.UserStore
             }
             user.AccessFailedCount++;
 
-            await _userRepo.UpdateAccessFailedCount(user.Id, user.AccessFailedCount);
-
-            return user.AccessFailedCount;
+            return Task.FromResult(user.AccessFailedCount);
         }
 
-        public async Task ResetAccessFailedCountAsync(TUser user, CancellationToken cancellationToken)
+        public Task ResetAccessFailedCountAsync(TUser user, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
@@ -68,10 +70,10 @@ namespace QuizzMan.IdentityStore.UserStore
             }
             user.AccessFailedCount = 0;
 
-            await _userRepo.UpdateAccessFailedCount(user.Id, user.AccessFailedCount);
+            return Task.FromResult(0);
         }
 
-        public async Task SetLockoutEnabledAsync(TUser user, bool enabled, CancellationToken cancellationToken)
+        public Task SetLockoutEnabledAsync(TUser user, bool enabled, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
@@ -81,7 +83,7 @@ namespace QuizzMan.IdentityStore.UserStore
             }
             user.LockoutEnabled = enabled;
 
-            await _userRepo.Save(user);
+            return Task.FromResult(0);
         }
 
         public Task SetLockoutEndDateAsync(TUser user, DateTimeOffset? lockoutEnd, CancellationToken cancellationToken)

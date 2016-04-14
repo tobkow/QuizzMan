@@ -58,7 +58,8 @@
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
           "Microsoft.AspNet.Identity": "3.0.0-rc1-final",
-          "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final"
+          "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final",
+          "System.Linq": "4.0.1-beta-23516"
         }
       },
       "Microsoft.AspNet.Antiforgery/1.0.0-rc1-final": {
@@ -2563,7 +2564,8 @@
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
           "Microsoft.AspNet.Identity": "3.0.0-rc1-final",
-          "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final"
+          "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final",
+          "System.Linq": "4.0.1-beta-23516"
         }
       },
       "Microsoft.AspNet.Antiforgery/1.0.0-rc1-final": {
@@ -5530,7 +5532,8 @@
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
           "Microsoft.AspNet.Identity": "3.0.0-rc1-final",
-          "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final"
+          "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final",
+          "System.Linq": "4.0.1-beta-23516"
         }
       },
       "Microsoft.AspNet.Antiforgery/1.0.0-rc1-final": {

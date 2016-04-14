@@ -16,22 +16,24 @@ namespace QuizzMan.IdentityStore
         /// <typeparam name="TContext">The Entity Framework database context to use.</typeparam>
         /// <param name="builder">The <see cref="IdentityBuilder"/> instance this method extends.</param>
         /// <returns>The <see cref="IdentityBuilder"/> instance this method extends.</returns>
-        public static IdentityBuilder AddDapperIdentityStores(this IdentityBuilder builder)
+        public static IdentityBuilder AddDapperIdentityStores<TIdentityRepo>(this IdentityBuilder builder)
+            where TIdentityRepo : IIdentityRepository<User,Role>
         {
-            builder.Services.TryAdd(GetDefaultServices(builder.UserType, builder.RoleType));
+            builder.Services.TryAdd(GetDefaultServices(builder.UserType, builder.RoleType, typeof(TIdentityRepo)));
             return builder;
         }
 
-        public static IdentityBuilder AddIdentityStore(this IdentityBuilder builder)
+        public static IdentityBuilder AddIdentityStore<TIdentityRepo>(this IdentityBuilder builder)
+            where TIdentityRepo : IIdentityRepository<User, Role>
         {
-            builder.Services.TryAdd(GetDefaultServices(builder.UserType, builder.RoleType));
+            builder.Services.TryAdd(GetDefaultServices(builder.UserType, builder.RoleType, typeof(TIdentityRepo)));
             return builder;
         }
 
-        private static IServiceCollection GetDefaultServices(Type userType, Type roleType)
+        private static IServiceCollection GetDefaultServices(Type userType, Type roleType, Type idRepoType)
         {
-            var userStoreType = typeof(UserStore<>).MakeGenericType(userType);
-            var roleStoreType = typeof(RoleStore<>).MakeGenericType(roleType);
+            var userStoreType = typeof(UserStore<,,>).MakeGenericType(userType, idRepoType);
+            var roleStoreType = typeof(RoleStore<>).MakeGenericType(roleType, idRepoType);
 
 
             var services = new ServiceCollection();
