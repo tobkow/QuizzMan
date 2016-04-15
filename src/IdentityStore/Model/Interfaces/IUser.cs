@@ -13,7 +13,6 @@ namespace QuizzMan.IdentityStore
         int AccessFailedCount { get; set; }
         bool LockoutEnabled { get; set; }
         DateTimeOffset? LockoutEnd { get; set; }
-        object UserGuid { get; set; }
         string PasswordHash { get; set; }
         string PhoneNumber { get; set; }
         bool PhoneNumberConfirmed { get; set; }

@@ -36,7 +36,9 @@ namespace QuizzMan
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddIdentity<User,Role>().AddDapperIdentityStores<IdentityRepository>().AddDefaultTokenProviders();
+            services.AddDapperRepository(Configuration["Data:DefaultConnection:SystemDb"]);
+
+            services.AddIdentity<User,Role>().AddDapperIdentityStore<IdentityRepository>().AddDefaultTokenProviders();
 
             services.AddMvc();
         }

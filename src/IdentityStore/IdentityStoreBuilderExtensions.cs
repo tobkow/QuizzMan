@@ -10,13 +10,7 @@ namespace QuizzMan.IdentityStore
 {
     public static class IdentityStoreBuilderExtensions
     {
-        /// <summary>
-        /// Adds an Entity Framework implementation of identity information stores.
-        /// </summary>
-        /// <typeparam name="TContext">The Entity Framework database context to use.</typeparam>
-        /// <param name="builder">The <see cref="IdentityBuilder"/> instance this method extends.</param>
-        /// <returns>The <see cref="IdentityBuilder"/> instance this method extends.</returns>
-        public static IdentityBuilder AddDapperIdentityStores<TIdentityRepo>(this IdentityBuilder builder)
+        public static IdentityBuilder AddDapperIdentityStore<TIdentityRepo>(this IdentityBuilder builder)
             where TIdentityRepo : IIdentityRepository<User,Role>
         {
             builder.Services.TryAdd(GetDefaultServices(builder.UserType, builder.RoleType, typeof(TIdentityRepo)));
