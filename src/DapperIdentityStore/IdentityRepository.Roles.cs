@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Dapper;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,29 +9,70 @@ namespace QuizzMan.IdentityStore.Dapper
 {
     public partial class IdentityRepository
     {
-        public Task<Role> GetRoleByName(string roleName)
+        public async Task<Role> GetRoleByName(string roleName)
         {
-            throw new NotImplementedException();
+            return await DapperProvider.WithConnection(async c => {
+
+                var p = new DynamicParameters();
+                p.Add("Name", roleName, DbType.String);
+
+                var result = await c.QueryAsync<Role>(
+                    sql: "Roles_GetByName",
+                    param: p,
+                    commandType: CommandType.StoredProcedure);
+                return result.FirstOrDefault();
+
+            });
         }
 
-        public Task<bool> AddUserToRole(int roleId, Guid roleGuid, int userId)
+        public async Task<IList<string>> GetRolesForUser(int userId)
         {
-            throw new NotImplementedException();
+            return await DapperProvider.WithConnection(async c =>
+            {
+
+                var p = new DynamicParameters();
+
+                p.Add("Name", userId, DbType.Int32);
+
+                var result = await c.QueryAsync<Role>(
+                    sql: "Roles_GetRolesForUser",
+                    param: p,
+                    commandType: CommandType.StoredProcedure);
+                return result.Select(role => role.Name).ToList();
+            });
         }
 
-        public Task<IList<string>> GetRolesForUser(int userId)
+        public async Task<IList<User>> GetUsersInRole(string roleName)
         {
-            throw new NotImplementedException();
+            return await DapperProvider.WithConnection(async c =>
+            {
+
+                var p = new DynamicParameters();
+
+                p.Add("Name", roleName, DbType.String);
+
+                var result = await c.QueryAsync<User>(
+                    sql: "Users_GetUsersInRole",
+                    param: p,
+                    commandType: CommandType.StoredProcedure);
+                return result.ToList();
+            });
         }
 
-        public Task<IList<User>> GetUsersInRole(string roleName)
+        public async Task<bool> RemoveUserFromRole(int roleId, int userId)
         {
-            throw new NotImplementedException();
-        }
+            return await DapperProvider.WithConnection(async c => {
 
-        public Task<bool> RemoveUserFromRole(int roleId, int userId)
-        {
-            throw new NotImplementedException();
+                var p = new DynamicParameters();
+                p.Add("UserId", userId, DbType.Int32);
+                p.Add("RoleId", roleId, DbType.Int32);
+
+                var result = await c.ExecuteAsync(
+                    sql: "UserRoles_DeleteByUserIdAndRoleId",
+                    param: p,
+                    commandType: CommandType.StoredProcedure);
+                return Convert.ToBoolean(result);
+            });
         }
     }
 }

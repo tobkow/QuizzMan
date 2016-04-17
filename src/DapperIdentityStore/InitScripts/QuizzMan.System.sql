@@ -6,7 +6,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Roles](
-	[Id] [nvarchar](128) NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [nvarchar](max) NOT NULL,
 	[NormalizedName] [nvarchar](max) NOT NULL,
     [ConcurrencyStamp] [nvarchar](max) NOT NULL,
@@ -24,7 +24,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[UserClaims](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[UserId] [nvarchar](128) NOT NULL,
+	[UserId] [int] NOT NULL,
 	[ClaimType] [nvarchar](max) NULL,
 	[ClaimValue] [nvarchar](max) NULL,
  CONSTRAINT [PK_dbo.UserClaims] PRIMARY KEY CLUSTERED 
@@ -40,7 +40,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[UserLogins](
-	[UserId] [nvarchar](128) NOT NULL,
+	[UserId] [int] NOT NULL,
 	[LoginProvider] [nvarchar](128) NOT NULL,
 	[ProviderDisplayName] [nvarchar](256) NOT NULL,
 	[ProviderKey] [nvarchar](128) NOT NULL,
@@ -59,8 +59,8 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[UserRoles](
-	[UserId] [nvarchar](128) NOT NULL,
-	[RoleId] [nvarchar](128) NOT NULL,
+	[UserId] [int] NOT NULL,
+	[RoleId] [int] NOT NULL,
  CONSTRAINT [PK_dbo.UserRoles] PRIMARY KEY CLUSTERED 
 (
 	[UserId] ASC,
@@ -75,7 +75,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Users](
-	[Id] [nvarchar](128) NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[UserName] [nvarchar](256) NOT NULL,
 	[NormalizedUserName] [nvarchar](256) NOT NULL,
 	[PasswordHash] [nvarchar](max) NULL,

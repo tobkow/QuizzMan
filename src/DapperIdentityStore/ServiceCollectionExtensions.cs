@@ -9,12 +9,9 @@ namespace QuizzMan.IdentityStore.Dapper
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddDapperRepository(this IServiceCollection serviceCollection, string connectionString)
+        public static DapperServicesBuilder UseDapper(this IServiceCollection serviceCollection)
         {
-            serviceCollection.TryAdd(new ServiceCollection()
-                .AddScoped<IIdentityRepository<User, Role>, IdentityRepository>(sp => new IdentityRepository(connectionString)));
-
-            return serviceCollection;
+            return new DapperServicesBuilder(serviceCollection);
         }
     }
 }

@@ -70,7 +70,7 @@ namespace QuizzMan.IdentityStore
             var userId = user.Id;
 
             IList<UserLoginInfo> logins = new List<UserLoginInfo>();
-            IList<IUserLogin> userLogins = await _userRepo.GetLoginsByUser(user.Id);
+            IList<UserLogin> userLogins = await _userRepo.GetLoginsByUser(user.Id);
 
             foreach (UserLogin ul in userLogins)
             {

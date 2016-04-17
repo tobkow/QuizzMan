@@ -13,8 +13,8 @@ namespace QuizzMan.IdentityStore
 
         Task<bool> DeleteClaimForUser(int userId, string claimType, string claimValue);
         Task<IList<TUser>> GetUsersByClaim(string claimType, string claimValue);
-        Task<IList<IUserClaim>> GetClaimsForUser(int userId);
-        Task<bool> Save(IUserClaim userClaim);
+        Task<IList<UserClaim>> GetClaimsForUser(int userId);
+        Task<bool> Create(IUserClaim userClaim);
 
         #endregion
 
@@ -22,7 +22,7 @@ namespace QuizzMan.IdentityStore
 
         Task<bool> Create(IUserLogin user);
         Task<IUserLogin> FindLoginByProviderAndKey(string loginProvider, string providerKey);
-        Task<IList<IUserLogin>> GetLoginsByUser(int userId);
+        Task<IList<UserLogin>> GetLoginsByUser(int userId);
         Task<bool> DeleteLogin(int userId, string loginProvider, string providerKey);
 
         #endregion
@@ -45,7 +45,6 @@ namespace QuizzMan.IdentityStore
         Task<bool> Create(TUser user);
         Task<bool> Update(TUser user);
         Task<bool> Delete(int user);
-        Task<bool> Save(TUser user);
 
         #endregion
     }

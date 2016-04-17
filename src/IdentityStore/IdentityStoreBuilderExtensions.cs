@@ -10,7 +10,7 @@ namespace QuizzMan.IdentityStore
 {
     public static class IdentityStoreBuilderExtensions
     {
-        public static IdentityBuilder AddDapperIdentityStore<TIdentityRepo>(this IdentityBuilder builder)
+        public static IdentityBuilder UseDapperIdentityStore<TIdentityRepo>(this IdentityBuilder builder)
             where TIdentityRepo : IIdentityRepository<User,Role>
         {
             builder.Services.TryAdd(GetDefaultServices(builder.UserType, builder.RoleType, typeof(TIdentityRepo)));
@@ -26,8 +26,8 @@ namespace QuizzMan.IdentityStore
 
         private static IServiceCollection GetDefaultServices(Type userType, Type roleType, Type idRepoType)
         {
-            var userStoreType = typeof(UserStore<,,>).MakeGenericType(userType, idRepoType);
-            var roleStoreType = typeof(RoleStore<>).MakeGenericType(roleType, idRepoType);
+            var userStoreType = typeof(UserStore<,,>).MakeGenericType(userType, roleType, idRepoType);
+            var roleStoreType = typeof(RoleStore<>).MakeGenericType(userType);
 
 
             var services = new ServiceCollection();

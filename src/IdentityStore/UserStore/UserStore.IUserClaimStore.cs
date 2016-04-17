@@ -33,7 +33,7 @@ namespace QuizzMan.IdentityStore.UserStore
                 userClaim.ClaimType = claim.Type;
                 userClaim.ClaimValue = claim.Value;
                 cancellationToken.ThrowIfCancellationRequested();
-                bool result = await _userRepo.Save(userClaim);
+                bool result = await _userRepo.Create(userClaim);
             }
         }
 
@@ -48,7 +48,7 @@ namespace QuizzMan.IdentityStore.UserStore
             cancellationToken.ThrowIfCancellationRequested();
 
             IList<Claim> claims = new List<Claim>();
-            IList<IUserClaim> userClaims = await _userRepo.GetClaimsForUser(user.Id);
+            IList<UserClaim> userClaims = await _userRepo.GetClaimsForUser(user.Id);
 
             foreach (UserClaim uc in userClaims)
             {
@@ -115,7 +115,7 @@ namespace QuizzMan.IdentityStore.UserStore
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            bool result = await _userRepo.Save(userClaim);
+            bool result = await _userRepo.Create(userClaim);
         }
     }
 }
