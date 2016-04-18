@@ -30,11 +30,11 @@ namespace QuizzMan.IdentityStore
                 throw new ArgumentException(nameof(roleName));
             }
 
-            var role = await _userRepo.GetRoleByName(roleName);
+            var role = await _identityRepo.GetRoleByName(roleName);
             bool result = false;
             if (role != null)
             {
-                result = await _userRepo.AddUserToRole(user.Id, role.Id);
+                result = await _identityRepo.AddUserToRole(user.Id, role.Id);
             }
         }
 
@@ -48,7 +48,7 @@ namespace QuizzMan.IdentityStore
                 throw new ArgumentNullException(nameof(user));
             }
 
-            return await _userRepo.GetRolesForUser(user.Id);
+            return await _identityRepo.GetRolesForUser(user.Id);
         }
 
         public async Task<IList<TUser>> GetUsersInRoleAsync(string roleName, CancellationToken cancellationToken)
@@ -61,7 +61,7 @@ namespace QuizzMan.IdentityStore
                 throw new ArgumentNullException(nameof(roleName));
             }
 
-            return await _userRepo.GetUsersInRole(roleName);
+            return await _identityRepo.GetUsersInRole(roleName);
         }
 
         public async Task<bool> IsInRoleAsync(TUser user, string roleName, CancellationToken cancellationToken)
@@ -78,7 +78,7 @@ namespace QuizzMan.IdentityStore
                 throw new ArgumentException(nameof(roleName));
             }
 
-            IList<string> roles = await _userRepo.GetRolesForUser(user.Id);
+            IList<string> roles = await _identityRepo.GetRolesForUser(user.Id);
 
             foreach (string r in roles)
             {
@@ -105,11 +105,11 @@ namespace QuizzMan.IdentityStore
                 throw new ArgumentException(nameof(roleName));
             }
 
-            var role = await _userRepo.GetRoleByName(roleName);
+            var role = await _identityRepo.GetRoleByName(roleName);
             
             if (role != null)
             {
-                await _userRepo.RemoveUserFromRole(role.Id, user.Id);
+                await _identityRepo.RemoveUserFromRole(role.Id, user.Id);
             }
         }
     }

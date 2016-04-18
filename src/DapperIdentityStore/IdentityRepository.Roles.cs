@@ -9,6 +9,77 @@ namespace QuizzMan.IdentityStore.Dapper
 {
     public partial class IdentityRepository
     {
+        public async Task<bool> Create(IRole role)
+        {
+            return await DapperProvider.WithConnection(async c => {
+
+                var p = new DynamicParameters();
+
+                p.Add("Name", role.Name, DbType.String);
+                p.Add("NormalizedName", role.NormalizedName, DbType.String);
+                p.Add("ConcurrencyStamp", role.ConcurrencyStamp, DbType.Guid);
+
+                var result = await c.ExecuteAsync(
+                    sql: "Roles_Create",
+                    param: p,
+                    commandType: CommandType.StoredProcedure);
+                return Convert.ToBoolean(result);
+
+            });
+        }
+
+        public async Task<bool> Update(IRole role)
+        {
+            return await DapperProvider.WithConnection(async c => {
+
+                var p = new DynamicParameters();
+
+                p.Add("RoleId", role.Id, DbType.Int32);
+                p.Add("Name", role.Name, DbType.String);
+                p.Add("NormalizedName", role.NormalizedName, DbType.String);
+                p.Add("ConcurrencyStamp", role.ConcurrencyStamp, DbType.Guid);
+
+                var result = await c.ExecuteAsync(
+                    sql: "Roles_Update",
+                    param: p,
+                    commandType: CommandType.StoredProcedure);
+                return Convert.ToBoolean(result);
+
+            });
+        }
+
+        public async Task<bool> DeleteRole(int roleId)
+        {
+            return await DapperProvider.WithConnection(async c => {
+
+                var p = new DynamicParameters();
+
+                p.Add("RoleId", roleId, DbType.Int32);
+
+                var result = await c.ExecuteAsync(
+                    sql: "Roles_Delete",
+                    param: p,
+                    commandType: CommandType.StoredProcedure);
+                return Convert.ToBoolean(result);
+            });
+        }
+
+        public async Task<Role> GetRoleById(int roleId)
+        {
+            return await DapperProvider.WithConnection(async c => {
+
+                var p = new DynamicParameters();
+                p.Add("RoleId", roleId, DbType.Int32);
+
+                var result = await c.QueryAsync<Role>(
+                    sql: "Roles_GetById",
+                    param: p,
+                    commandType: CommandType.StoredProcedure);
+                return result.FirstOrDefault();
+
+            });
+        }
+
         public async Task<Role> GetRoleByName(string roleName)
         {
             return await DapperProvider.WithConnection(async c => {

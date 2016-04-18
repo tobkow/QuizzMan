@@ -33,7 +33,7 @@ namespace QuizzMan.IdentityStore.UserStore
                 userClaim.ClaimType = claim.Type;
                 userClaim.ClaimValue = claim.Value;
                 cancellationToken.ThrowIfCancellationRequested();
-                bool result = await _userRepo.Create(userClaim);
+                bool result = await _identityRepo.Create(userClaim);
             }
         }
 
@@ -48,7 +48,7 @@ namespace QuizzMan.IdentityStore.UserStore
             cancellationToken.ThrowIfCancellationRequested();
 
             IList<Claim> claims = new List<Claim>();
-            IList<UserClaim> userClaims = await _userRepo.GetClaimsForUser(user.Id);
+            IList<UserClaim> userClaims = await _identityRepo.GetClaimsForUser(user.Id);
 
             foreach (UserClaim uc in userClaims)
             {
@@ -68,7 +68,7 @@ namespace QuizzMan.IdentityStore.UserStore
                 throw new ArgumentNullException(nameof(claim));
             }
 
-            return await _userRepo.GetUsersByClaim(claim.Type, claim.Value);
+            return await _identityRepo.GetUsersByClaim(claim.Type, claim.Value);
         }
 
         public async Task RemoveClaimsAsync(TUser user, IEnumerable<Claim> claims, CancellationToken cancellationToken)
@@ -86,7 +86,7 @@ namespace QuizzMan.IdentityStore.UserStore
             foreach (var claim in claims)
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                await _userRepo.DeleteClaimForUser(user.Id, claim.Type, claim.Value);
+                await _identityRepo.DeleteClaimForUser(user.Id, claim.Type, claim.Value);
             }
         }
 
@@ -106,7 +106,7 @@ namespace QuizzMan.IdentityStore.UserStore
                 throw new ArgumentNullException(nameof(newClaim));
             }
 
-            await _userRepo.DeleteClaimForUser(user.Id, claim.Type, claim.Value);
+            await _identityRepo.DeleteClaimForUser(user.Id, claim.Type, claim.Value);
 
             UserClaim userClaim = new UserClaim();
             userClaim.UserId = user.Id;
@@ -115,7 +115,7 @@ namespace QuizzMan.IdentityStore.UserStore
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            bool result = await _userRepo.Create(userClaim);
+            bool result = await _identityRepo.Create(userClaim);
         }
     }
 }

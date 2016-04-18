@@ -18,7 +18,7 @@ namespace QuizzMan.IdentityStore.UserStore
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
 
-            return await _userRepo.GetByEmail(normalizedEmail);
+            return await _identityRepo.GetByEmail(normalizedEmail);
         }
 
         public Task<string> GetEmailAsync(TUser user, CancellationToken cancellationToken)

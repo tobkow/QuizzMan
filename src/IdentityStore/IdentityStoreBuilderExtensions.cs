@@ -27,7 +27,7 @@ namespace QuizzMan.IdentityStore
         private static IServiceCollection GetDefaultServices(Type userType, Type roleType, Type idRepoType)
         {
             var userStoreType = typeof(UserStore<,,>).MakeGenericType(userType, roleType, idRepoType);
-            var roleStoreType = typeof(RoleStore<>).MakeGenericType(userType);
+            var roleStoreType = typeof(RoleStore<,,>).MakeGenericType(userType, roleType, idRepoType);
 
 
             var services = new ServiceCollection();

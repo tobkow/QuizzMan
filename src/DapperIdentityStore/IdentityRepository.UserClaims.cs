@@ -32,7 +32,6 @@ namespace QuizzMan.IdentityStore.Dapper
 
                 var p = new DynamicParameters();
 
-                p.Add("Id", userClaim.Id, DbType.Int32);
                 p.Add("UserId", userClaim.UserId, DbType.Int32);
                 p.Add("ClaimType", userClaim.ClaimType, DbType.String);
                 p.Add("ClaimValue", userClaim.ClaimValue, DbType.String);

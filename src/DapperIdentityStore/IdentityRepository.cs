@@ -33,7 +33,6 @@ namespace QuizzMan.IdentityStore.Dapper
 
                 var p = new DynamicParameters();
 
-                p.Add("Id", user.Id, DbType.Int32);
                 p.Add("UserName", user.UserName, DbType.String);
                 p.Add("NormalizedUserName", user.NormalizedUserName, DbType.String);
                 p.Add("Email", user.Email, DbType.String);

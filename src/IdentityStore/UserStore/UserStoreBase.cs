@@ -20,12 +20,12 @@ namespace QuizzMan.IdentityStore
             }
         }
 
-        protected TIdentityRepo _userRepo;
+        protected TIdentityRepo _identityRepo;
         protected UserStoreBase() { }
 
-        public UserStoreBase(TIdentityRepo userRepo)
+        public UserStoreBase(TIdentityRepo idRepo)
         {
-            _userRepo = userRepo;
+            _identityRepo = idRepo;
         }
 
         public Task<string> GetUserIdAsync(TUser user, CancellationToken cancellationToken)
@@ -95,7 +95,7 @@ namespace QuizzMan.IdentityStore
             }
 
             //result not used for now
-            bool result = await _userRepo.Create(user);
+            bool result = await _identityRepo.Create(user);
 
             return IdentityResult.Success;
         }
@@ -110,7 +110,7 @@ namespace QuizzMan.IdentityStore
             }
 
             //result not used for now
-            bool result = await _userRepo.Update(user);
+            bool result = await _identityRepo.Update(user);
 
             return IdentityResult.Success;
         }
@@ -124,7 +124,7 @@ namespace QuizzMan.IdentityStore
                 throw new ArgumentNullException(nameof(user));
             }
 
-            await _userRepo.Delete(user.Id);
+            await _identityRepo.Delete(user.Id);
 
             return IdentityResult.Success;
         }
@@ -135,14 +135,14 @@ namespace QuizzMan.IdentityStore
             ThrowIfDisposed();
 
             // PARSE WITHOUT EXCEPTIONS HERE
-            return await _userRepo.GetUserByIdAsync(int.Parse(userId));
+            return await _identityRepo.GetUserByIdAsync(int.Parse(userId));
         }
 
         public async Task<TUser> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
-            return await _userRepo.GetUserByNameAsync(normalizedUserName);
+            return await _identityRepo.GetUserByNameAsync(normalizedUserName);
         }
 
         public void Dispose()

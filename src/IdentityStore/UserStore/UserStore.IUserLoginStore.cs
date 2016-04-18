@@ -37,7 +37,7 @@ namespace QuizzMan.IdentityStore
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            await _userRepo.Create(userlogin);
+            await _identityRepo.Create(userlogin);
         }
 
         public async Task<TUser> FindByLoginAsync(string loginProvider, string providerKey, CancellationToken cancellationToken)
@@ -45,12 +45,12 @@ namespace QuizzMan.IdentityStore
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
 
-            IUserLogin userLogin = await _userRepo.FindLoginByProviderAndKey(loginProvider, providerKey);
+            IUserLogin userLogin = await _identityRepo.FindLoginByProviderAndKey(loginProvider, providerKey);
 
             if (userLogin != null && userLogin.UserId > 0)
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                TUser user = await _userRepo.GetUserByIdAsync(userLogin.UserId);
+                TUser user = await _identityRepo.GetUserByIdAsync(userLogin.UserId);
                 
                 return user ?? default(TUser);
             }
@@ -70,7 +70,7 @@ namespace QuizzMan.IdentityStore
             var userId = user.Id;
 
             IList<UserLoginInfo> logins = new List<UserLoginInfo>();
-            IList<UserLogin> userLogins = await _userRepo.GetLoginsByUser(user.Id);
+            IList<UserLogin> userLogins = await _identityRepo.GetLoginsByUser(user.Id);
 
             foreach (UserLogin ul in userLogins)
             {
@@ -90,7 +90,7 @@ namespace QuizzMan.IdentityStore
             }
             var userId = user.Id;
 
-            bool result = await _userRepo.DeleteLogin(user.Id, loginProvider, providerKey);
+            bool result = await _identityRepo.DeleteLogin(user.Id, loginProvider, providerKey);
         }
     }
 }

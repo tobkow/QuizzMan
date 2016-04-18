@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace QuizzMan.IdentityStore
@@ -30,10 +31,23 @@ namespace QuizzMan.IdentityStore
         #region Roles
 
         Task<TRole> GetRoleByName(string roleName);
+        Task<TRole> GetRoleById(int roleId);
         Task<bool> AddUserToRole(int userId, int roleId);
         Task<IList<string>> GetRolesForUser(int userId);
         Task<IList<TUser>> GetUsersInRole(string roleName);
         Task<bool> RemoveUserFromRole(int roleId, int userId);
+        Task<bool> Create(IRole role);
+        Task<bool> Update(IRole role);
+        Task<bool> DeleteRole(int roleId);
+
+        #endregion
+
+        #region Role claims
+
+        Task<bool> AddRoleClaim(int roleId, string claimType, string claimValue);
+        Task<IList<Claim>> GetRoleClaimsByRoleId(int roleId);
+        Task<IList<RoleClaim>> GetRoleClaims(int roleId, string claimType, string claimValue);
+        Task<bool> DeleteRoleClaim(int roleClaimId);
 
         #endregion
 

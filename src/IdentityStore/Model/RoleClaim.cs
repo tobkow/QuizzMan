@@ -1,4 +1,4 @@
-﻿namespace QuizzMan.IdentityStore.Model
+﻿namespace QuizzMan.IdentityStore
 {
     public class RoleClaim : IRoleClaim
     {

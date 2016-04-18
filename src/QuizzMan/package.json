@@ -1,6 +1,6 @@
 {
 	"version": "1.0.0",
-	"name": "ASP.NET",
+	"name": "QuizzMan",
 	"private": true,
   "devDependencies": {
     "gulp": "3.9.1",
