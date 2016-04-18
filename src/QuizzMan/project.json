@@ -1,5 +1,6 @@
 {
   "version": "1.0.0-*",
+  "copyright": "Copyright © Tobiasz Kowalczyk 2016",
   "compilationOptions": {
     "emitEntryPoint": true
   },
