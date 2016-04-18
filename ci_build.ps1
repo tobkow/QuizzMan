@@ -1,3 +1,7 @@
+$PSScriptFilePath = (Get-Item $MyInvocation.MyCommand.Path).FullName
+
+$SolutionRoot = Split-Path -Path $PSScriptFilePath -Parent
+
 $DNU = "dnu"
 $DNVM = "dnvm"
 
@@ -6,7 +10,7 @@ $DNVM = "dnvm"
 & $DNU restore
 
 # Set the version number in package.json
-$ProjectJsonPath = Join-Path -Path $SolutionRoot -ChildPath "src\Smidge\project.json"
+$ProjectJsonPath = Join-Path -Path $SolutionRoot -ChildPath "src\QuizzMan\project.json"
 (gc -Path $ProjectJsonPath) `
 	-replace "(?<=`"version`":\s`")[.\w-]*(?=`",)", "$ReleaseVersionNumber$PreReleaseName" |
 	sc -Path $ProjectJsonPath -Encoding UTF8
