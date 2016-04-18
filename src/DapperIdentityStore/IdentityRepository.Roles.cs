@@ -103,7 +103,7 @@ namespace QuizzMan.IdentityStore.Dapper
 
                 var p = new DynamicParameters();
 
-                p.Add("Name", userId, DbType.Int32);
+                p.Add("UserId", userId, DbType.Int32);
 
                 var result = await c.QueryAsync<Role>(
                     sql: "Roles_GetRolesForUser",

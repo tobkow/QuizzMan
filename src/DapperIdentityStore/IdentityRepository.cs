@@ -37,6 +37,7 @@ namespace QuizzMan.IdentityStore.Dapper
                 p.Add("NormalizedUserName", user.NormalizedUserName, DbType.String);
                 p.Add("Email", user.Email, DbType.String);
                 p.Add("NormalizedEmail", user.NormalizedEmail, DbType.String);
+                p.Add("EmailConfirmed", user.EmailConfirmed, DbType.Boolean);
                 p.Add("AccessFailedCount", user.AccessFailedCount, DbType.Int32);
                 p.Add("LockoutEnabled", user.LockoutEnabled, DbType.Boolean);
                 p.Add("LockoutEnd", user.LockoutEnd, DbType.DateTimeOffset);

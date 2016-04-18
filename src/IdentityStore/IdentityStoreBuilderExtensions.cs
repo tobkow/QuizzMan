@@ -11,8 +11,9 @@ namespace QuizzMan.IdentityStore
     public static class IdentityStoreBuilderExtensions
     {
         public static IdentityBuilder UseDapperIdentityStore<TIdentityRepo>(this IdentityBuilder builder)
-            where TIdentityRepo : IIdentityRepository<User,Role>
+            where TIdentityRepo : class,IIdentityRepository<User,Role>
         {
+            builder.Services.TryAddScoped<IIdentityRepository<User, Role>, TIdentityRepo>();
             builder.Services.TryAdd(GetDefaultServices(builder.UserType, builder.RoleType, typeof(TIdentityRepo)));
             return builder;
         }

@@ -1,11 +1,11 @@
 ﻿USE [QuizzMan.System]
 GO
 
-IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'Users_Insert')
-DROP PROCEDURE [Users_Insert]
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'Users_Create')
+DROP PROCEDURE [Users_Create]
 GO
 
-CREATE PROC [dbo].[Users_Insert]  
+CREATE PROC [dbo].[Users_Create]  
 (  
 	@UserName nvarchar(256),
 	@NormalizedUserName nvarchar(256),

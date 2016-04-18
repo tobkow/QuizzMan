@@ -8,7 +8,9 @@ using System.Security.Claims;
 
 namespace QuizzMan.IdentityStore
 {
-    public class RoleStore<TUser,TRole,TIdentityRepo> : RoleStoreBase<TUser,TRole,TIdentityRepo>, IRoleStore<TRole>, IRoleClaimStore<TRole>
+    public class RoleStore<TUser,TRole,TIdentityRepo> : RoleStoreBase<TUser,TRole,TIdentityRepo>,
+        IRoleStore<TRole>,
+        IRoleClaimStore<TRole>
         where TIdentityRepo : IIdentityRepository<TUser, TRole>
         where TUser : class, IUser
         where TRole : class, IRole

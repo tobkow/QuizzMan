@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using QuizzMan.IdentityStore;
 using QuizzMan.IdentityStore.Dapper;
+using QuizzMan.Website.Services;
 
 namespace QuizzMan
 {
@@ -41,6 +42,9 @@ namespace QuizzMan
             services.AddIdentity<User,Role>().UseDapperIdentityStore<IdentityRepository>().AddDefaultTokenProviders();
 
             services.AddMvc();
+
+            services.AddTransient<IEmailSender, AuthMessageSender>();
+            services.AddTransient<ISmsSender, AuthMessageSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,7 +66,9 @@ namespace QuizzMan
             app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
             
             app.UseStaticFiles();
-            
+
+            app.UseIdentity();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
