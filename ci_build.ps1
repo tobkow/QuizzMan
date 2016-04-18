@@ -7,7 +7,7 @@ $DNVM = "dnvm"
 
 & $DNVM install 1.0.0-rc1-update1
 & $DNVM use 1.0.0-rc1-update1
-& $DNU restore
+& $DNU restore "$ProjectJsonPath"
 
 # Set the version number in package.json
 $ProjectJsonPath = Join-Path -Path $SolutionRoot -ChildPath "src\QuizzMan\project.json"
@@ -21,4 +21,4 @@ $DateYear = (Get-Date).year
 	sc -Path $ProjectJsonPath -Encoding UTF8
 
  #run the build
-& $DNU build
+& $DNU build "$ProjectJsonPath"
