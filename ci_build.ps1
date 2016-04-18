@@ -1,13 +1,20 @@
+param (
+	[Parameter(Mandatory=$true)]
+	[ValidatePattern("^\d+\.\d+\.(?:\d+\.\d+$|\d+$)")]
+	[string]
+	$ReleaseVersionNumber,
+	[Parameter(Mandatory=$true)]
+	[string]
+	[AllowEmptyString()]
+	$PreReleaseName
+)
+
 $PSScriptFilePath = (Get-Item $MyInvocation.MyCommand.Path).FullName
 
 $SolutionRoot = Split-Path -Path $PSScriptFilePath -Parent
 
-$DNU = "dnu"
-$DNVM = "dnvm"
-
-& $DNVM install 1.0.0-rc1-update1
-& $DNVM use 1.0.0-rc1-update1
-& $DNU restore "$ProjectJsonPath"
+& dnvm use 1.0.0-rc1-update1
+& dnu restore "$ProjectJsonPath"
 
 # Set the version number in package.json
 $ProjectJsonPath = Join-Path -Path $SolutionRoot -ChildPath "src\QuizzMan\project.json"
@@ -21,4 +28,4 @@ $DateYear = (Get-Date).year
 	sc -Path $ProjectJsonPath -Encoding UTF8
 
  #run the build
-& $DNU build "$ProjectJsonPath"
+& dnu build "$ProjectJsonPath"
