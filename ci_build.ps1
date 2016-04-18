@@ -21,4 +21,4 @@ $DateYear = (Get-Date).year
 	sc -Path $ProjectJsonPath -Encoding UTF8
 
  #run the build
-$ $DNU build
+& $DNU build
