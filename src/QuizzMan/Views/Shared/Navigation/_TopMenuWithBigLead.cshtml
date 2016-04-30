@@ -1,0 +1,12 @@
+﻿<div class="ui container">
+    <div class="ui large secondary inverted pointing menu">
+        <a class="toc item">
+            <i class="sidebar icon"></i>
+        </a>
+        <a class="active item">Home</a>
+        <a class="item" asp-controller="Home" asp-action="Index">Work</a>
+        <a class="item">Company</a>
+        <a class="item" asp-controller="Account" asp-action="Register">Authorize</a>
+        @await Html.PartialAsync("_LoginPartial")
+    </div>
+</div>
