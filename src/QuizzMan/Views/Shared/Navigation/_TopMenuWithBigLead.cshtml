@@ -1,4 +1,6 @@
-﻿<div class="ui container">
+﻿@using System.Security.Claims
+
+<div class="ui container">
     <div class="ui large secondary inverted pointing menu">
         <a class="toc item">
             <i class="sidebar icon"></i>
@@ -6,7 +8,13 @@
         <a class="active item">Home</a>
         <a class="item" asp-controller="Home" asp-action="Index">Work</a>
         <a class="item">Company</a>
-        <a class="item" asp-controller="Account" asp-action="Register">Authorize</a>
+        @if (User.IsSignedIn())
+        {
+            <a class="item" asp-route-area="ControlPanel" asp-controller="Home" asp-action="Index">
+                <i class="icon setting"></i>
+                Control panel
+            </a>
+        }
         @await Html.PartialAsync("_LoginPartial")
     </div>
 </div>

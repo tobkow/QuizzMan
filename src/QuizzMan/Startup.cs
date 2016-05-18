@@ -39,7 +39,7 @@ namespace QuizzMan
         {
             services.UseDapper().AddSqlProvider(opts => opts.ConnectionString = Configuration["Data:DefaultConnection:SystemDb"]).AddRepository<IdentityRepository>();
 
-            services.AddIdentity<User,Role>().UseDapperIdentityStore<IdentityRepository>().AddDefaultTokenProviders();
+            services.AddIdentity<User, Role>().UseDapperIdentityStore<IdentityRepository>().AddDefaultTokenProviders();
 
             services.AddMvc();
 
@@ -64,13 +64,16 @@ namespace QuizzMan
             }
 
             app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
-            
+
             app.UseStaticFiles();
 
             app.UseIdentity();
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name: "areaRoute",
+                    template: "{area:exists}/{controller=Home}/{action=Index}");
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

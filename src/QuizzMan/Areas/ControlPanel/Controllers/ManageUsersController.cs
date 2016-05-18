@@ -7,9 +7,11 @@ using Microsoft.AspNet.Authorization;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace QuizzMan.Website.Controllers
+namespace QuizzMan.Website.Areas.ControlPanel.Controllers
 {
-    public class HomeController : Controller
+    [Authorize]
+    [Area("ControlPanel")]
+    public class ManageUsersController : Controller
     {
         // GET: /<controller>/
         public IActionResult Index()

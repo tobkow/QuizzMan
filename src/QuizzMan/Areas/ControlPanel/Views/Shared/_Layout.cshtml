@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Site Properties -->
+    <title>@ViewBag.Title</title>
+
+    <environment names="Development">
+        @await Html.PartialAsync("StylePartials/Dev/_ControlPanelLayoutStyles")
+    </environment>
+    <environment names="Staging,Production">
+        @await Html.PartialAsync("StylePartials/Prod/_ControlPanelLayoutStyles")
+    </environment>
+    @RenderSection("stylesheets", required: false)
+</head>
+
+<body class="layouts pushable">
+
+    <div class="ui vertical inverted sidebar menu" id="toc">
+        @await Html.PartialAsync("_SiteMenu")
+    </div>
+    @await Html.PartialAsync("_TopMenu")
+    <div class="pusher">
+        <div class="full height">
+            <div class="toc">
+                <div class="ui inverted vertical sticky menu">
+                    @await Html.PartialAsync("_SiteMenu")
+                </div>
+            </div>
+            @RenderBody()
+            @*@await Html.PartialAsync("_Footer")*@
+        </div>
+        @await Html.PartialAsync("_Footer")
+    </div>
+
+    <environment names="Development">
+        @await Html.PartialAsync("ScriptPartials/Dev/_ControlPanelLayoutScripts")
+    </environment>
+    <environment names="Staging,Production">
+        @await Html.PartialAsync("ScriptPartials/Prod/_ControlPanelLayoutScripts")
+    </environment>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

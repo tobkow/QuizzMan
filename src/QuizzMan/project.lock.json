@@ -1081,6 +1081,20 @@
           "lib/dotnet5.4/Microsoft.Extensions.Configuration.Json.dll": {}
         }
       },
+      "Microsoft.Extensions.Configuration.UserSecrets/1.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Json": "1.0.0-rc1-final",
+          "System.Runtime": "4.0.21-beta-23516",
+          "System.Runtime.Serialization.Primitives": "4.0.11-beta-23409"
+        },
+        "compile": {
+          "lib/dotnet5.4/Microsoft.Extensions.Configuration.UserSecrets.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet5.4/Microsoft.Extensions.Configuration.UserSecrets.dll": {}
+        }
+      },
       "Microsoft.Extensions.DependencyInjection/1.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -2199,6 +2213,19 @@
         },
         "runtime": {
           "lib/DNXCore50/System.Runtime.Loader.dll": {}
+        }
+      },
+      "System.Runtime.Serialization.Primitives/4.0.11-beta-23409": {
+        "type": "package",
+        "dependencies": {
+          "System.Resources.ResourceManager": "4.0.0",
+          "System.Runtime": "4.0.20"
+        },
+        "compile": {
+          "ref/dotnet/System.Runtime.Serialization.Primitives.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet/System.Runtime.Serialization.Primitives.dll": {}
         }
       },
       "System.Security.Claims/4.0.1-beta-23516": {
@@ -3588,6 +3615,20 @@
         },
         "runtime": {
           "lib/dotnet5.4/Microsoft.Extensions.Configuration.Json.dll": {}
+        }
+      },
+      "Microsoft.Extensions.Configuration.UserSecrets/1.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Json": "1.0.0-rc1-final",
+          "System.Runtime": "4.0.21-beta-23516",
+          "System.Runtime.Serialization.Primitives": "4.0.11-beta-23409"
+        },
+        "compile": {
+          "lib/dotnet5.4/Microsoft.Extensions.Configuration.UserSecrets.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet5.4/Microsoft.Extensions.Configuration.UserSecrets.dll": {}
         }
       },
       "Microsoft.Extensions.DependencyInjection/1.0.0-rc1-final": {
@@ -5104,6 +5145,19 @@
           "lib/dotnet/System.Runtime.Numerics.dll": {}
         }
       },
+      "System.Runtime.Serialization.Primitives/4.0.11-beta-23409": {
+        "type": "package",
+        "dependencies": {
+          "System.Resources.ResourceManager": "4.0.0",
+          "System.Runtime": "4.0.20"
+        },
+        "compile": {
+          "ref/dotnet/System.Runtime.Serialization.Primitives.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet/System.Runtime.Serialization.Primitives.dll": {}
+        }
+      },
       "System.Security.Claims/4.0.1-beta-23516": {
         "type": "package",
         "dependencies": {
@@ -6556,6 +6610,20 @@
         },
         "runtime": {
           "lib/dotnet5.4/Microsoft.Extensions.Configuration.Json.dll": {}
+        }
+      },
+      "Microsoft.Extensions.Configuration.UserSecrets/1.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Json": "1.0.0-rc1-final",
+          "System.Runtime": "4.0.21-beta-23516",
+          "System.Runtime.Serialization.Primitives": "4.0.11-beta-23409"
+        },
+        "compile": {
+          "lib/dotnet5.4/Microsoft.Extensions.Configuration.UserSecrets.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet5.4/Microsoft.Extensions.Configuration.UserSecrets.dll": {}
         }
       },
       "Microsoft.Extensions.DependencyInjection/1.0.0-rc1-final": {
@@ -8072,6 +8140,19 @@
           "lib/dotnet/System.Runtime.Numerics.dll": {}
         }
       },
+      "System.Runtime.Serialization.Primitives/4.0.11-beta-23409": {
+        "type": "package",
+        "dependencies": {
+          "System.Resources.ResourceManager": "4.0.0",
+          "System.Runtime": "4.0.20"
+        },
+        "compile": {
+          "ref/dotnet/System.Runtime.Serialization.Primitives.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet/System.Runtime.Serialization.Primitives.dll": {}
+        }
+      },
       "System.Security.Claims/4.0.1-beta-23516": {
         "type": "package",
         "dependencies": {
@@ -9408,6 +9489,20 @@
         "Microsoft.Extensions.Configuration.Json.1.0.0-rc1-final.nupkg",
         "Microsoft.Extensions.Configuration.Json.1.0.0-rc1-final.nupkg.sha512",
         "Microsoft.Extensions.Configuration.Json.nuspec"
+      ]
+    },
+    "Microsoft.Extensions.Configuration.UserSecrets/1.0.0-rc1-final": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "m2WaXGNWRrbpWquen8PS1oB8GdG5tCSWhXAmFbhacj1mhz3ojFy0TDUZPbx87TX2ZQNNp6MYfzO5Z73hlM47Bw==",
+      "files": [
+        "lib/dotnet5.4/Microsoft.Extensions.Configuration.UserSecrets.dll",
+        "lib/dotnet5.4/Microsoft.Extensions.Configuration.UserSecrets.xml",
+        "lib/net451/Microsoft.Extensions.Configuration.UserSecrets.dll",
+        "lib/net451/Microsoft.Extensions.Configuration.UserSecrets.xml",
+        "Microsoft.Extensions.Configuration.UserSecrets.1.0.0-rc1-final.nupkg",
+        "Microsoft.Extensions.Configuration.UserSecrets.1.0.0-rc1-final.nupkg.sha512",
+        "Microsoft.Extensions.Configuration.UserSecrets.nuspec"
       ]
     },
     "Microsoft.Extensions.DependencyInjection/1.0.0-rc1-final": {
@@ -12285,6 +12380,38 @@
         "System.Runtime.Numerics.nuspec"
       ]
     },
+    "System.Runtime.Serialization.Primitives/4.0.11-beta-23409": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "AQywM01eG8EgYde/RRrJDVdHmOOI3KkgK9GEjLQqvTLsrWsamNHN/j7Pxwa3XX7klSSrfDpvTNfUl40855idVg==",
+      "files": [
+        "lib/dotnet/de/System.Runtime.Serialization.Primitives.xml",
+        "lib/dotnet/es/System.Runtime.Serialization.Primitives.xml",
+        "lib/dotnet/fr/System.Runtime.Serialization.Primitives.xml",
+        "lib/dotnet/it/System.Runtime.Serialization.Primitives.xml",
+        "lib/dotnet/ja/System.Runtime.Serialization.Primitives.xml",
+        "lib/dotnet/ko/System.Runtime.Serialization.Primitives.xml",
+        "lib/dotnet/ru/System.Runtime.Serialization.Primitives.xml",
+        "lib/dotnet/System.Runtime.Serialization.Primitives.dll",
+        "lib/dotnet/System.Runtime.Serialization.Primitives.xml",
+        "lib/dotnet/zh-hans/System.Runtime.Serialization.Primitives.xml",
+        "lib/dotnet/zh-hant/System.Runtime.Serialization.Primitives.xml",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net46/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "ref/dotnet/System.Runtime.Serialization.Primitives.dll",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net46/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "System.Runtime.Serialization.Primitives.4.0.11-beta-23409.nupkg",
+        "System.Runtime.Serialization.Primitives.4.0.11-beta-23409.nupkg.sha512",
+        "System.Runtime.Serialization.Primitives.nuspec"
+      ]
+    },
     "System.Security.Claims/4.0.1-beta-23516": {
       "type": "package",
       "serviceable": true,
@@ -13174,7 +13301,8 @@
       "Microsoft.Extensions.Configuration.Json >= 1.0.0-rc1-final",
       "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0-rc1-final",
       "DapperIdentityStore >= 1.0.0-*",
-      "IdentityStore >= 1.0.0-*"
+      "IdentityStore >= 1.0.0-*",
+      "Microsoft.Extensions.Configuration.UserSecrets >= 1.0.0-rc1-final"
     ],
     "DNXCore,Version=v5.0": []
   }

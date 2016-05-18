@@ -10,11 +10,12 @@
     <title>@ViewBag.Title</title>
 
     <environment names="Development">
-        @await Html.PartialAsync("Development/_LayoutStylesheets")
+        @await Html.PartialAsync("StylePartials/Dev/_LayoutStyles")
     </environment>
     <environment names="Staging,Production">
-        @await Html.PartialAsync("Production/_LayoutStylesheets")
+        @await Html.PartialAsync("StylePartials/Prod/_LayoutStyles")
     </environment>
+    @RenderSection("stylesheets", required: false)
 </head>
 <body>
         @await Html.PartialAsync("Navigation/_FollowingMenu")
@@ -26,10 +27,10 @@
         </div>
 
     <environment names="Development">
-        @await Html.PartialAsync("Development/_LayoutScripts")
+        @await Html.PartialAsync("ScriptPartials/Dev/_LayoutScripts")
     </environment>
     <environment names="Staging,Production">
-        @await Html.PartialAsync("Production/_LayoutScripts")
+        @await Html.PartialAsync("ScriptPartials/Prod/_LayoutScripts")
     </environment>
 
     @RenderSection("scripts", required: false)

@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Control panel";
+}
+
+<div class="article">
+    <div class="ui masthead vertical tab segment">
+        <div class="ui container">
+            <div class="introduction">
+                <h1 class="ui header">
+                    Icon
+                    <div class="sub header">
+                        An icon is a glyph used to represent something else
+                    </div>
+                </h1>
+            </div>
+            <div class="ui two item stackable tabs menu">
+                <a class="item active" data-tab="users">Users</a>
+                <a class="item" data-tab="groups">Groups</a>
+                @*<a class="item" data-tab="usage">Usage</a>
+                    <a class="item" data-tab="settings">Settings</a>*@
+            </div>
+        </div>
+    </div>
+    <div class="main ui container">
+        <div class="ui active tab" data-tab="users">
+            <h2 class="ui header">
+                Users
+                <a class="anchor" id="mainTitle"></a>
+            </h2>
+        </div>
+        <div class="ui tab" data-tab="groups">
+            <h2 class="ui header">
+                Groups
+                <a class="anchor" id="mainTitle"></a>
+            </h2>
+        </div>
+        <div class="ui tab" data-tab="usage">
+        </div>
+        <div class="ui tab" data-tab="settings">
+        </div>
+    </div>
+</div>
+
+
+
