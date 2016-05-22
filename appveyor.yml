@@ -11,7 +11,7 @@ install:
 environment:
   PATH: $(PATH);$(PROGRAMFILES)\dotnet\
 build_script:
-- npm install -g bower
+- npm install -g gulp bower
 - appveyor-retry dotnet restore -v Minimal
 - dotnet build **\project.json -c %CONFIGURATION%
 - dotnet pack -c %CONFIGURATION% --no-build --version-suffix %LABEL% -o .\artifacts .\src\IdentityStore\project.json
