@@ -2,3 +2,8 @@
 src/QuizzMan/Project_Readme.html
 src/QuizzMan/Website.xproj.user
 src/QuizzMan/node_modules/
+*.suo
+*.user
+_ReSharper.*
+bin
+obj

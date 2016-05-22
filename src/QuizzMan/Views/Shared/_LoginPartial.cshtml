@@ -1,9 +1,10 @@
-﻿@using System.Security.Claims
+﻿@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 
-@if (User.IsSignedIn())
+@if (SignInManager.IsSignedIn(User))
 {
     <form asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="right menu">
-            <a class="item" asp-controller="Home" asp-action="Index" title="Manage">Hello @User.GetUserName()!</a>
+            <a class="item" asp-controller="Home" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
             <button type="submit" class="ui inverted button">Log off</button>
     </form>
 }

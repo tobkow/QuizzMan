@@ -1,6 +1,6 @@
-﻿@using System.Security.Claims
+﻿@inject SignInManager<User> SignInManager
 
-@if (User.IsSignedIn())
+@if (SignInManager.IsSignedIn(User))
 {
     <form asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="item">
         <button type="submit" class="ui inverted button">Logoff</button>

@@ -1,4 +1,4 @@
-﻿@using System.Security.Claims
+﻿@inject SignInManager<User> SignInManager
 
 <div class="ui container">
     <div class="ui large secondary inverted pointing menu">
@@ -8,7 +8,7 @@
         <a class="active item">Home</a>
         <a class="item" asp-controller="Home" asp-action="Index">Work</a>
         <a class="item">Company</a>
-        @if (User.IsSignedIn())
+        @if (SignInManager.IsSignedIn(User))
         {
             <a class="item" asp-route-area="ControlPanel" asp-controller="Home" asp-action="Index">
                 <i class="icon setting"></i>
