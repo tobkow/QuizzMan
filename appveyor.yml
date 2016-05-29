@@ -24,8 +24,5 @@ after_build:
 artifacts:
 - path: QuizzMan.zip
   name: QuizzMan
-#- path: artifacts\**\*.*
 cache:
 - '%USERPROFILE%\.nuget\packages'
-on_finish: # Run the demo to show that it works
-#- dotnet .\artifacts\QuizzMan\QuizzMan.dll
