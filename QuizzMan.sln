@@ -14,7 +14,7 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Website", "src\QuizzMan\Web
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "IdentityStore", "src\IdentityStore\IdentityStore.xproj", "{A682C797-8CFF-4B92-A17F-BDCFACADF199}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "IdentityStore.Dapper", "src\DapperIdentityStore\IdentityStore.Dapper.xproj", "{C415C4D3-0BD4-43E9-9EFD-79BF777581CB}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "IdentityStore.Dapper", "src\IdentityStore.Dapper\IdentityStore.Dapper.xproj", "{C415C4D3-0BD4-43E9-9EFD-79BF777581CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

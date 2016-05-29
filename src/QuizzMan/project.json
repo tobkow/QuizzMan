@@ -33,7 +33,7 @@
       "type": "build"
     },
     "IdentityStore": "1.0.0-*",
-    "DapperIdentityStore": "1.0.0-*"
+    "IdentityStore.Dapper": "1.0.0-*"
   },
 
   "tools": {

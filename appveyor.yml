@@ -17,11 +17,15 @@ build_script:
 - dotnet pack -c %CONFIGURATION% --no-build --version-suffix %LABEL% -o .\artifacts .\src\IdentityStore\project.json
 - dotnet pack -c %CONFIGURATION% --no-build --version-suffix %LABEL% -o .\artifacts .\src\DapperIdentityStore\project.json
 - dotnet publish -c %CONFIGURATION% --no-build --version-suffix %LABEL% -o .\artifacts\QuizzMan .\src\QuizzMan\project.json
+after_build:
+- 7z a QuizzMan.zip .\artifacts\QuizzMan\*.*
 # test_script:
 # - dotnet test -c %CONFIGURATION% --no-build .\test\MyFirstUnitTests
 artifacts:
-- path: artifacts\**\*.*
+- path: QuizzMan.zip
+  name: QuizzMan
+#- path: artifacts\**\*.*
 cache:
 - '%USERPROFILE%\.nuget\packages'
 on_finish: # Run the demo to show that it works
-- dotnet .\artifacts\QuizzMan\QuizzMan.dll
+#- dotnet .\artifacts\QuizzMan\QuizzMan.dll

@@ -4014,7 +4014,23 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
-      "DapperIdentityStore/1.0.0": {
+      "IdentityStore/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.5",
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity": "1.0.0-rc2-final",
+          "Microsoft.Extensions.DependencyInjection": "1.0.0-rc2-final",
+          "NETStandard.Library": "1.5.0-rc2-24027",
+          "System.Linq": "4.1.0-rc2-24027"
+        },
+        "compile": {
+          "netstandard1.5/IdentityStore.dll": {}
+        },
+        "runtime": {
+          "netstandard1.5/IdentityStore.dll": {}
+        }
+      },
+      "IdentityStore.Dapper/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.5",
         "dependencies": {
@@ -4037,22 +4053,12 @@
           "System.Threading.ThreadPool": "4.0.10-rc2-24027",
           "System.Xml.XDocument": "4.0.11-rc2-24027",
           "System.Xml.XmlDocument": "4.0.1-rc2-24027"
-        }
-      },
-      "IdentityStore/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v1.5",
-        "dependencies": {
-          "Microsoft.AspNetCore.Identity": "1.0.0-rc2-final",
-          "Microsoft.Extensions.DependencyInjection": "1.0.0-rc2-final",
-          "NETStandard.Library": "1.5.0-rc2-24027",
-          "System.Linq": "4.1.0-rc2-24027"
         },
         "compile": {
-          "netstandard1.5/IdentityStore.dll": {}
+          "netstandard1.5/IdentityStore.Dapper.dll": {}
         },
         "runtime": {
-          "netstandard1.5/IdentityStore.dll": {}
+          "netstandard1.5/IdentityStore.Dapper.dll": {}
         }
       }
     }
@@ -10286,20 +10292,21 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "DapperIdentityStore/1.0.0": {
-      "type": "project",
-      "path": "../DapperIdentityStore/project.json"
-    },
     "IdentityStore/1.0.0": {
       "type": "project",
       "path": "../IdentityStore/project.json",
       "msbuildProject": "../IdentityStore/IdentityStore.xproj"
+    },
+    "IdentityStore.Dapper/1.0.0": {
+      "type": "project",
+      "path": "../IdentityStore.Dapper/project.json",
+      "msbuildProject": "../IdentityStore.Dapper/IdentityStore.Dapper.xproj"
     }
   },
   "projectFileDependencyGroups": {
     "": [
-      "DapperIdentityStore >= 1.0.0-*",
       "IdentityStore >= 1.0.0-*",
+      "IdentityStore.Dapper >= 1.0.0-*",
       "Microsoft.AspNetCore.Authentication.Cookies >= 1.0.0-rc2-final",
       "Microsoft.AspNetCore.Diagnostics >= 1.0.0-rc2-final",
       "Microsoft.AspNetCore.Mvc >= 1.0.0-rc2-final",
