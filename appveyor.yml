@@ -15,7 +15,7 @@ build_script:
 - appveyor-retry dotnet restore -v Minimal
 - dotnet build **\project.json -c %CONFIGURATION%
 - dotnet pack -c %CONFIGURATION% --no-build --version-suffix %LABEL% -o .\artifacts .\src\IdentityStore\project.json
-- dotnet pack -c %CONFIGURATION% --no-build --version-suffix %LABEL% -o .\artifacts .\src\DapperIdentityStore\project.json
+- dotnet pack -c %CONFIGURATION% --no-build --version-suffix %LABEL% -o .\artifacts .\src\IdentityStore.Dapper\project.json
 - dotnet publish -c %CONFIGURATION% --no-build --version-suffix %LABEL% -o .\artifacts\QuizzMan .\src\QuizzMan\project.json
 after_build:
 - 7z a QuizzMan.zip .\artifacts\QuizzMan\*.*
